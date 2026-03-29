@@ -5,61 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Verification</title>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-        }
-        .container {
-            width: 90%;
-            max-width: 400px;
-            padding: 20px;
-            background: #1e1e1e;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        h1 {
-            font-size: 24px;
-            margin-bottom: 30px;
-        }
-        .buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-        .btn {
-            padding: 15px;
-            font-size: 18px;
-            font-weight: bold;
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            text-decoration: none;
-            transition: background 0.3s;
-        }
-        .btn-yes {
-            background-color: #e91e63;
-            color: white;
-        }
-        .btn-no {
-            background-color: #333;
-            color: #aaa;
-        }
-        .btn:active {
-            opacity: 0.8;
-        }
+        body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #121212; color: #ffffff; display: flex; justify-content: center; align-items: center; height: 100vh; text-align: center; }
+        .container { width: 90%; max-width: 400px; padding: 25px; background: #1e1e1e; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.6); border: 1px solid #333; }
+        .profile-info { color: #e91e63; font-weight: bold; margin-bottom: 10px; font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+        h1 { font-size: 22px; margin-bottom: 30px; line-height: 1.4; }
+        .buttons { display: flex; flex-direction: column; gap: 15px; }
+        .btn { padding: 18px; font-size: 18px; font-weight: bold; border: none; border-radius: 12px; cursor: pointer; text-decoration: none; transition: transform 0.1s, background 0.3s; }
+        .btn-yes { background-color: #e91e63; color: white; }
+        .btn-no { background-color: #333; color: #aaa; }
+        .btn:active { transform: scale(0.98); opacity: 0.9; }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <div class="profile-info" id="profile-text">You are visiting the profile:</div>
+    <div style="font-size: 20px; font-weight: bold; margin-bottom: 20px; color: #fff;">Amanda2026</div>
     <h1 id="question">Are you 21 or older?</h1>
     <div class="buttons">
         <button class="btn btn-yes" id="btn-yes" onclick="redirect()">Yes</button>
@@ -71,22 +32,23 @@
     const targetUrl = "https://stayas.top/click?o=2&a=4634";
 
     const translations = {
-        ru: { question: "Вам уже исполнилось 21?", yes: "Да", no: "Нет" },
-        en: { question: "Are you 21 or older?", yes: "Yes", no: "No" },
-        es: { question: "¿Eres mayor de 21 años?", yes: "Sí", no: "No" },
-        fr: { question: "Avez-vous 21 ans ou plus ?", yes: "Oui", no: "Non" },
-        de: { question: "Sind Sie 21 Jahre oder älter?", yes: "Ja", no: "Nein" },
-        it: { question: "Hai almeno 21 anni?", yes: "Sì", no: "No" },
-        pt: { question: "Você tem 21 anos ou mais?", yes: "Sim", no: "Não" },
-        zh: { question: "您满21岁了吗？", yes: "是", no: "否" },
-        ja: { question: "21歳以上ですか？", yes: "はい", no: "いいえ" },
-        ko: { question: "21세 이상입니까?", yes: "예", no: "아니오" }
+        ru: { profile: "Вы переходите на профиль:", question: "Вам уже исполнилось 21?", yes: "Да", no: "Нет" },
+        en: { profile: "You are visiting the profile:", question: "Are you 21 or older?", yes: "Yes", no: "No" },
+        es: { profile: "Estás visitando el perfil:", question: "¿Eres mayor de 21 años?", yes: "Sí", no: "No" },
+        fr: { profile: "Vous visitez le profil:", question: "Avez-vous 21 ans ou plus ?", yes: "Oui", no: "Non" },
+        de: { profile: "Sie besuchen das Profil:", question: "Sind Sie 21 Jahre oder älter?", yes: "Ja", no: "Nein" },
+        it: { profile: "Stai visitando il profilo:", question: "Hai almeno 21 anni?", yes: "Sì", no: "No" },
+        pt: { profile: "Você está visitando o perfil:", question: "Você tem 21 anos ou mais?", yes: "Sim", no: "Não" },
+        zh: { profile: "您正在访问个人资料：", question: "您满21岁了吗？", yes: "是", no: "否" },
+        ja: { profile: "プロフィールを訪問しています：", question: "21歳以上ですか？", yes: "はい", no: "いいえ" },
+        ko: { profile: "프로필을 방문 중입니다:", question: "21세 이상입니까?", yes: "예", no: "아니오" }
     };
 
     function init() {
         const lang = (navigator.language || navigator.userLanguage).split('-')[0];
         const t = translations[lang] || translations.en;
         
+        document.getElementById('profile-text').innerText = t.profile;
         document.getElementById('question').innerText = t.question;
         document.getElementById('btn-yes').innerText = t.yes;
         document.getElementById('btn-no').innerText = t.no;
